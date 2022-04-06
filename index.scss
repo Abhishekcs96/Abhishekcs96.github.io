@@ -1,0 +1,59 @@
+@import "./bootstrap-5.0.2/scss/bootstrap.scss";
+@import "./bootstrap-5.0.2/scss/bootstrap-utilities.scss";
+:root{
+    border-left: #000000;
+}
+.figure-caption {
+    font-size: 0.6rem;
+}
+body {
+    background: rgb(255, 207, 104);
+    background: linear-gradient(90deg, rgba(255, 207, 104, 1) 100%, rgba(46, 42, 34, 1) 100%);
+}
+#bolding {
+    font-weight: bold;
+}
+#caption {
+    color: #000000;
+    font-weight: bold;
+}
+.frontend {
+    @include font-size(0.875rem);
+    text-align: justify;
+}
+
+@media (min-width: 544px) {
+    .frontend {
+        font-size: 1rem;
+    }
+    .figure-caption {
+        font-size: 1.2rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .frontend {
+        font-size: 1.2rem;
+    }
+    .figure-caption {
+        font-size: 0.9rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .frontend {
+        font-size: 1.4rem;
+    }
+    .figure-caption {
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .frontend {
+        font-size: 1.7rem;
+    }
+    .figure-caption {
+        font-size: 1.2rem;
+    }
+}
