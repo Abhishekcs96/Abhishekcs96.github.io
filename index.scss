@@ -1,13 +1,5 @@
-@import "./bootstrap-5.0.2/scss/bootstrap-utilities.scss";
-:root{
-    border-left: #000000;
-}
-.figure-caption {
-    font-size: 0.6rem;
-}
 body {
     background: rgb(255, 207, 104);
-    background: linear-gradient(90deg, rgba(255, 207, 104, 1) 100%, rgba(46, 42, 34, 1) 100%);
 }
 #bolding {
     font-weight: bold;
@@ -16,8 +8,11 @@ body {
     color: #000000;
     font-weight: bold;
 }
+.figure-caption {
+    font-size: 0.6rem;
+}
 .frontend {
-    @include font-size(0.875rem);
+    font-size: 0.875rem;
     text-align: justify;
 }
 
