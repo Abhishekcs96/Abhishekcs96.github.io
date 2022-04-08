@@ -115,9 +115,10 @@
       <p>
         I added a couple extra services in there, modified it to play around a
         little more. The core concept of the challenge still remains in place
-        though and that was always the first thing on my mind. And as we go on
+        though and that was always the first thing on my mind. The serverless part(the cloudformation stack)
+        also consists of an extra lambda function, api and a Dynamodb table for testing purposes. And as we go on
         with this write-up, I will do my best to explain what each part of this
-        architecture hopes to achieve.
+        architecture hopes to achieve. 
       </p>
     </div>
 
@@ -578,6 +579,16 @@
         python test. It stands somewhere between a unittest and an integration
         test, but it works as intended and I'm happy with the final script.
       </p>
+      <figure class="figure d-block py-4">
+        <img
+          src="./images/test environment cloud.PNG"
+          class="img-fluid mx-auto d-block p-2"
+          alt="Extra testing on the cloud"
+        />
+        <figcaption id="caption" class="figure-caption text-center p-4">
+          Test Environment setup in the cloud.
+        </figcaption>
+      </figure>
       <p>
         As for my node function that processes an email, I didn't see the need
         to create a demo/test environment. I decided to use jest again in order
