@@ -11,9 +11,13 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
-    <link rel="icon" href="./images/reshot-icon-cloud-system-6XMEDJ7WKY.svg" type="image/icon type"/>
+    <link
+      rel="icon"
+      href="./images/reshot-icon-cloud-system-6XMEDJ7WKY.svg"
+      type="image/icon type"
+    />
     <link href="./index.css" rel="stylesheet" />
-    
+
     <title>A post on my website project</title>
   </head>
   <body class="container-lg">
@@ -40,7 +44,7 @@
         some time, it remained just an idea. That is until I came across the
         <a
           href="https://cloudresumechallenge.dev/"
-          referrerpolicy="no_referrer"
+          referrerpolicy="no-refferer"
           target="blank"
           >cloud resume challenge by Forrest brazeal.</a
         >
@@ -321,7 +325,10 @@
         single entity and overall, was a great read.
       </p>
     </div>
-    <div class="display-4 mt-5 py-3 text-decoration-underline text-center" id="bolding">
+    <div
+      class="display-4 mt-5 py-3 text-decoration-underline text-center"
+      id="bolding"
+    >
       The Serverless Backend
     </div>
     <div class="frontend">
@@ -359,41 +366,47 @@
     </div>
     <div class="frontend">
       <p>
-        Starting off with API gateways, this was not as bad as I thought it
-        would be since I already had some knowledge in working with API calls
-        with some of my front end mini projects and therefore I was able to
-        grasp the basic idea of what was going on. However I hadn't really
-        created an API myself before and that was an interesting process to work
-        with. Also because this was an unfamiliar territory with me, I had
-        decided to play around with the console once and implement the
-        functionality manually through the console, but as part of the
-        challenge, SAM is required to be used and therefore I did redo all of it
-        through a SAM template (more on this in the IaC section).
+        Starting off with API gateways, and let's just put it this way, things
+        did not kick off well. I thought it would be slightly easier since I
+        already had some knowledge in working with API calls with some of my
+        front end mini projects but working with the API gateway is a whole
+        different beast.
       </p>
       <p>
-        With that said, there are still certain things I don't understand with
-        API gateways, but I learnt a whole lot with this challenge. Implementing
-        response code in my lambda functions to allow for cors, learning the
-        differences between proxy, non-proxy and mock integrations, the
-        heartache of not being able to enable cors on the console, and while
-        there is a test functionality within the console, I hadn't actually seen
-        it until later and so I used to test my APIs with Postman and create a
-        demo event object to pass as an event to my lambda function. Learning to
-        correct errors such as 500, 502, cors etc was a frustrating experience
-        at times but I genuinely got a better idea once I worked with it. Also,
-        remember to add your API as a trigger to your lambda function, sometimes
-        I had to manually do so through the console, but I'm sure that must be
-        an error from my part. Really thankful I had decided to take this part
-        of the challenge on.
+        I hadn't really created an API myself before and that was an interesting
+        process to work with. Also because this was an unfamiliar territory to
+        me, I had decided to play around with the console once and implement the
+        functionality manually, but as part of the challenge, SAM is required to
+        be used and therefore I did redo all of it through a SAM template (more
+        on this in the IaC section). I created 3 api's in total, 2 for my Update
+        table function and one for my Email function. The reason I created 2
+        api's for the former was due to my testing strategy, which will be
+        explained more in detail in the testing section.
       </p>
+      <p>
+        This service was definitely confusing working with. From being able to
+        detect cors errors, understanding how request and response headers work,
+        differences between proxy, non-proxy and mock integrations, there's a
+        whole lot I learn with this challenge and really glad I decided to play
+        around with it. Because of my lack of understanding, this part of the
+        challenge definitely took a lot of time trying to debug errors with the
+        help of a lot of stackoverflow. I also used external testing API's such
+        as Postman but the API testing tool inbuilt into API gateway proved to
+        be extremely useful in trying to understand why I was getting http 400
+        or 500 errors. I also used Postman to test my post api specifically, but
+        I definitely liked the API gateway testing feature better due to the
+        logs it provides you with. Really thankful I had decided to take this
+        part of the challenge on.
+      </p>
+
       <figure class="figure d-block py-4">
         <img
-          src="./images/API gateway trigger.PNG"
+          src="./images/TestingAPIgateway.PNG"
           class="img-fluid mx-auto d-block p-2"
-          alt="API gateway trigger"
+          alt="API Testing"
         />
         <figcaption id="caption" class="figure-caption text-center p-4">
-          Remember to add triggers.
+          Don't miss the testing feature in the console.
         </figcaption>
       </figure>
     </div>
@@ -503,17 +516,80 @@
       </p>
     </div>
     <div class="display-6 py-3 text-decoration-underline" id="bolding">
-      Testing...Not quite..
+      Testing
     </div>
     <div class="frontend">
       <p>
-        The tests were a bit of a weak point for me at the start as I wasn't
-        exactly sure what kind of tests I should be integrating into my CI/CD
-        pipeline for a static website. Then I read about the testing suite that
-        comes pre-installed with create-react-app called jest testsuite, which
-        is a react testing library and you can run tests with jest using the npm
-        test command. Linter tests and npm test for my front-end were
-        integrating into my pipeline to test my frontend.
+        A very vast topic to cover, testing is a very important part of the
+        DevOps product lifecycle. Initially, the tests were a bit of a weak
+        point for me at the start as I wasn't exactly sure what kind of tests I
+        should be integrating into my CI/CD pipeline for the frontend. All of
+        that changed when I had to figure writing tests for my backend. Deciding
+        between the different kinds of testing to do and which one applies the
+        best to your code is important to identify. I don't think I did the
+        perfect job when it came to identifying, but I'm happy with the testing
+        scripts and process I came up with.
+      </p>
+      <p>
+        Beginning with the frontend, I read about the testing suite that comes
+        pre-installed with create-react-app called jest , which is a testing
+        library for JS and you can run tests with jest using the npm test
+        command. Linter tests and npm test for my front-end were some of the
+        kinds of tests I ran. Create-react-app comes with a predefined test
+        component that you can use in order to test your frontend. I did replace
+        the text and match it with my landing page so it would check the text on
+        the landing page to make sure my frontend loaded properly. Nothing too
+        hard, just using what I had.
+      </p>
+      <p>
+        For the backend, things were slightly more complex. I wanted to figure
+        what kind of test I wanted to implement. The reference provided in the
+        Cloud Resume challenge proved to be a good start for python based
+        testing. It gave me a good idea on what I needed to do. Now, there were
+        two possible ways I could have gone about it. One way was to create an
+        integration test for a local "mock" environment that I would create.
+        This approach seemed like a good way but I also thought about creating a
+        testing environment directly in the cloud.
+        <a
+          href="https://www.fernandomc.com/posts/serverless-testing-with-moto/"
+          target="blank"
+          referrerpolicy="no-referrer"
+          >This article by Fernando MC</a
+        >
+        provided a very good comparison and is where I originally drew the idea
+        of testing in the cloud from. The best advantage of testing in the cloud
+        is that it mimics the real environment one to one and because serverless
+        resources are usually so cheap, it really makes it worth it to test it
+        on the cloud. And thats what I decided to do for my visitor count
+        testing. I created a demo environment, another lambda function, another
+        API, and another Dynamodb table so my tests wouldn't change resource
+        values on the real one. Finally it ended up perfectly as I expected it
+        to be. And as for the testing logic, I decided to compare the value in
+        the table between two successive lambda invocations and operations. If
+        the second response happened to be 1 higher than the previous one, then
+        it was working as intended.
+        <a
+          href="https://www.youtube.com/watch?v=jnA208Xlbu8"
+          target="blank"
+          referrerpolicy="no-referrer"
+          >This video on youtube</a
+        >
+        explains the logic and is extremely well put. And that's about it for my
+        python test. It stands somewhere between a unittest and an integration
+        test, but it works as intended and I'm happy with the final script.
+      </p>
+      <p>
+        As for my node function that processes an email, I didn't see the need
+        to create a demo/test environment. I decided to use jest again in order
+        to test my code and followed the documentation in writing a jest test.
+        After meddling around a little with my function and trying to test async
+        code, I found a decent logic to work with, and one that sends me test
+        emails if a test is successful. Since promises can take a little time to
+        resolve, it's important to use a callback or just a return statement if
+        using the async/await syntax which was what I used. I then compared the
+        response body with the test body and if it was the same, then the email
+        was a success. Similar to the above, I'd consider it between a unittest
+        and an integration test, though I'm leaning more towards the former.
       </p>
       <figure class="figure d-block py-4">
         <img
@@ -533,13 +609,16 @@
         invoke and SAM local API commands to test my lambda functions and API
         urls respectively. You can pass the test objects either using the echo
         command or you can create a test object locally like I did, and pass it
-        in the SAM local invoke command. However, there aren't any dedicated
-        testing scripts for my backend applications and I definitely intend on
-        writing some test scripts for my backend scripts and therefore, I
-        consider this part of the project as ongoing and about half complete.
+        in the SAM local invoke command. Overall, learning testing was extremely
+        interesting. There's so many ways you could go about it and I'm sure
+        there's more optimally written tests than mine, but for the start, it
+        was a great learning experience.
       </p>
     </div>
-    <div class="display-4 mt-5 py-3 text-decoration-underline text-center" id="bolding">
+    <div
+      class="display-4 mt-5 py-3 text-decoration-underline text-center"
+      id="bolding"
+    >
       Tooling
     </div>
     <div class="frontend">
@@ -799,42 +878,51 @@
     </div>
     <div class="frontend">
       <p>
-        The CI/CD process for my backend is to mainly provision the serverless
-        infrastructure and so this pipeline was a lot simpler to setup. Once my
-        SAM template was defined and locally tested, I would initiate the
-        pipeline. There is only one stage defined and for this stage, I opted to
-        create a custom image with python, node, docker, aws cli and awssamcli
-        installed. The idea was to be able to execute SAM local invoke commands
-        as part of my pipeline testing stage, but I kept running into a docker
-        dind error and despite referencing docker dind in my pipeline, it didn't
-        work. I assume there's some complexities with trying to use SAM local
-        commands in a container and while solutions do exist, it definitely was
-        hard and a little out of scope for this project and so I decided to just
-        go ahead with a build and deploy stage while manually validating and
-        testing my files. Pretty similar to the frontend, just a lot less going
-        on.
+        The CI/CD process for my backend was to mainly provision the serverless
+        infrastructure and so this pipeline was a little simpler to setup. Once
+        my SAM template was defined and locally tested, I would initiate the
+        pipeline. I decided to create two pipeline stages, with the first one
+        running both build and test jobs. I opted to create a custom image with
+        python, node, docker, aws cli and awssamcli installed. Since my image
+        contained both python and node, the test jobs that I wrote would execute
+        properly without much trouble. SAM local commands are little trickier to
+        pull off. I assume there's some complexities with trying to use SAM
+        local commands in a container and while solutions do exist, it
+        definitely was hard and a little out of scope for this project. Besides,
+        unittests integrated into your pipeline provide almost all the testing
+        needed to tick all the boxes. There were some difficulties in trying to
+        grant jest some permissions to be able to execute the testing, and with
+        some modification, that was solved as well. After testing, all that was
+        left was to deploy. Pretty similar to the frontend, but handling the
+        crucial infrastructure and testing, so definitely just as important.
       </p>
     </div>
-    <div class="display-4 mt-5 py-3 text-decoration-underline text-center" id="bolding">
+    <div
+      class="display-4 mt-5 py-3 text-decoration-underline text-center"
+      id="bolding"
+    >
       The End
     </div>
     <div class="frontend">
       <p>
-        If you made it this far, congratulations! since as the title suggests,
-        this is the end! I applaud your perseverance in going through
-        potentially mundane blocks of text just to read my experience on working
-        with my project and hopefully there was something of value you could
-        take away from this. By no means is my project perfect and I understand
-        that, I always consider it to be something that can always be improved
-        upon. Future plans for this project would be to rework the architecture
-        slightly to accomodate for possible incoming application deployments in
-        my instance and also probably incorporate tools such as Kubernetes to
-        manage my containers. Prometheus and grafana are also great tools that
-        could be used in order to monitor the applications and there are endless
-        possibilities in how this project can be modified. It has honestly
-        taught me so many things and working with them hands on was the absolute
-        best. I will definitely be improving this project further and possibly
-        update this write up whenever I can. Thank you once again.
+        And with that, my project has come to an end (not really but for the
+        sake of this blog, yes). If you made it this far, congratulations! since
+        as the title suggests, this is the end! I applaud your perseverance in
+        going through potentially mundane blocks of text just to read my
+        experience on working with my project and hopefully there was something
+        of value you could take away from this. By no means is my project
+        perfect and I understand that, I always consider it to be something that
+        can always be improved upon. Future plans for this project would be to
+        rework the architecture slightly to accomodate for possible incoming
+        application deployments in my instance and also probably incorporate
+        tools such as Kubernetes to manage my containers. Prometheus and grafana
+        are also great tools that could be used in order to monitor the
+        applications and there are endless possibilities in how this project can
+        be modified. It has honestly taught me so many things and working with
+        them hands on was the absolute best. I'd
+        like to thank the author of this challenge for providing a great way to
+        transforming theory knowledge into something practical. I will definitely be improving this
+        project further and possibly update this write up whenever I can. 
       </p>
     </div>
 
@@ -843,6 +931,5 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-  
   </body>
 </html>
