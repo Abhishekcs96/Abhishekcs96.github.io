@@ -676,6 +676,9 @@
         well. I had studied a bit about cloudformation and creating stacks and
         defining templates, but SAM makes the whole process so much easier and
         so much smoother too, SAM being an extension of cloudformation.
+        Terraform has also played an important role in the development of my
+        application infrastructure, since terraform was the first tool I used
+        before deciding to use both terraform and AWS SAM as part of my project.
       </p>
       <figure class="figure d-block py-4">
         <img
@@ -734,30 +737,62 @@
         </figcaption>
       </figure>
       <p>
-        Terraform templates and in general, service templates exist for every
-        IaC tool out there. These templates give you a baseline configuration
-        and all the configuration options you will ever need for a service. This
-        was of great help when I started and definitely started making the
-        transition to IaC easier. Even though templates provide a great way for
-        you to understand whats required, I think the best way is to first
-        provision every bit of infrastucture you'll need via the console.
-        Configure them via the console as well. Once you have a working model,
-        abstract them to you preferred choice of IaC tool and then the whole
-        process is a lot easier to understand.
+        Terraform modules and in general, service templates exist for every IaC
+        tool out there. These modules or templates give you a baseline
+        configuration and all the configuration options you will ever need for a
+        service. This was of great help when I started and definitely started
+        making the transition to IaC easier. Even though templates provide a
+        great way for you to understand whats required, I think the best way is
+        to first provision every bit of infrastucture you'll need via the
+        console. Configure them via the console as well. Once you have a working
+        model, abstract them to you preferred choice of IaC tool and then the
+        whole process is a lot easier to understand.
       </p>
-      <span style="font-weight: bold; font-style: italic">
-        But what's the benefit in that?</span
-      >
+      <p>
+        Once I had sufficiently played around in the console, it was time to
+        "destroy" what I had created and reinitialise or redeploy the same
+        infra. using terraform. This time, I introduced the use of Terraform
+        very slowly. I Identified the use case of terraform in my project and
+        then re-provisioned my server based vpc resources such as my EC2
+        instance and my application load balancer, along with their respective
+        security groups. Learning to use the modules and templates in the
+        documentation was key to understanding how terraform works. My Terraform
+        code for EC2 instance also included a boot script/user script which
+        installs docker into the instance during its first boot only. This is a
+        feature added to employ the use of docker containers within my EC2
+        instance on automatic re-initialization and replacement of my EC2
+        instance. Currently no auto scaling group launch configuration exists so
+        reboots are manual. This feature is part of future terraform code to
+        manage ASG along with defining user scripts to auto scale and replace
+        unhealthy EC2 instances with healthy ones, pre installed with the docker
+        engine. Serverless resources were managed via AWS SAM as it's a great
+        native AWS feature to manage serverless stacks.
+      </p>
+      <p style="font-weight: bold">Update-</p>
+      <span
+        >I decided to abstract my default AWS resources such as VPC, Subnet
+        groups, Route table, Internet Gateway and so on, into Terraform as well.
+        Terraform provides a great command called terraform import, which
+        enables you to manage existing resources on your cloud provider through
+        terraform by abstracting it's state into your terraform code. This was a
+        game changer in being able to manage my already existing infrastructure
+        on terraform. With this out of the way, Further integration of AWS SAM
+        and terraform will come into play (Read more about SAM below).
+      </span>
+
+      <p style="font-weight: bold; font-style: italic; margin-top: 10px">
+        But what's the benefit in that?
+      </p>
 
       <p>
-        I'll be honest, I couldn’t quite understand the benefits of terraform,
-        SAM or IaC in general. I was lacking an idea and the understanding as to
-        why they are considered so important when they are tedious to write and
-        one small mistake can break your deployments. But a key component in
-        getting things right is to learn from previous failures and when I
-        decided to provision my serverless backend using SAM, I decided to first
-        go through all the options via the console, then provision them with
-        SAM.
+        I'll be honest, I still couldn’t quite understand the benefits of
+        terraform, SAM or IaC in general after all the playing around as well. I
+        was lacking an idea and the understanding as to why they are considered
+        so important when they are tedious to write and one small mistake can
+        break your deployments. But a key component in getting things right is
+        to learn from previous errors and when I decided to re-provision my
+        resources and my serverless backend using Terraform (again) and SAM, I
+        could see the benefits coming.
       </p>
       <p>
         The whole thing hit me like a eureka moment once I had finished defining
@@ -776,17 +811,19 @@
       </p>
       <p>
         Coming back to my project, I want to wrap it up to make a bit of a TLDR
-        here. I ended up using both SAM and terraform. Terraform however, for
-        all practical purposes only maintains my EC2's configuration and state
-        and it is also not part of my CI/CD. SAM, on the other hand was used
-        after I understood the importance of IaC. SAM was also slightly easier
-        to learn compared to terraform, I think that is to be expected given
-        that it is an extension of cloudform specifically for serverless
-        resources. Learning both Terraform and SAM were crucial in understanding
-        the concepts of IaC and its importance in the industry. Since some of my
-        resources are still not part of IaC, I do intend on bringing them into
-        the mix as well and so even this stage can be further extended to
-        accommodate for all the resources used in my architecture.
+        here. I ended up using both SAM and terraform. Terraform currently
+        maintains my "server" resources such as my EC2's configuration and my
+        Application load balancer. Terraform is also not part of my CI/CD. SAM,
+        on the other hand was slightly easier to learn, given it's easy to learn
+        syntax. I think that is to be expected given that it is an extension of
+        cloudform specifically for serverless resources. Learning both Terraform
+        and SAM were crucial in understanding the concepts of IaC and its
+        importance in the industry. Since some of my resources are still not
+        part of IaC, I do intend on bringing them into the mix as well and so
+        even this stage is ongoing and can be further extended to accommodate
+        for all the resources used in my architecture. Eventually, my end goal
+        is to maintain them either through terraform or SAM and that will take
+        some tinkering to do.
       </p>
     </div>
     <div class="display-6 py-3 text-decoration-underline" id="bolding">
